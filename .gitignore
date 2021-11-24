@@ -1,0 +1,4 @@
+build/
+venv/
+geckodriver.log
+__pycache__
