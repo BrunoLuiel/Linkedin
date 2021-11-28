@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver import ChromeOptions
+from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.common.keys import Keys
 import os
 import time
@@ -8,8 +10,10 @@ class Linkedin_bot:
     def __init__(self, username, password):
         self.username = username
         self.password = password
-        self.path = os.getcwd() + "\geckodriver.exe"
-        self.driver = webdriver.Firefox(executable_path =r"{}".format(self.path))
+        chrome_options = ChromeOptions()
+        chrome_options.add_argument("disable-infobars")
+        chrome_options.add_argument("start-maximized")
+        self.driver = webdriver.Chrome(ChromeDriverManager().install(), options=chrome_options)
 
     def login(self):
         driver = self.driver
@@ -42,7 +46,7 @@ class Linkedin_bot:
     def digite_como_pessoa(frase, onde_digitar):
         for letra in frase:
             onde_digitar.send_keys(letra)
-            time.sleep(random.randint(1,2)/60)
+            time.sleep(random.randint(1,10)/60)
 
     def printt(self): #Este foi apenas um estudo para criar arquivo txt com dados extraidos da web.
         driver = self.driver
